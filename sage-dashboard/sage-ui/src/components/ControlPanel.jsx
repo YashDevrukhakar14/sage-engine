@@ -15,8 +15,10 @@ export default function ControlPanel({ services, logCount, isOpen, onToggle }) {
           onClick={() => onToggle(true)} 
           className="collapse-toggle-btn" 
           title="Expand Sidebar"
+          aria-label="Expand Sidebar"
+          aria-expanded={false}
         >
-          <PanelLeftOpen size={20} />
+          <PanelLeftOpen size={20} aria-hidden="true" />
         </button>
       </aside>
     );
@@ -29,8 +31,10 @@ export default function ControlPanel({ services, logCount, isOpen, onToggle }) {
           onClick={() => onToggle(false)} 
           className="collapse-toggle-btn" 
           title="Collapse Sidebar"
+          aria-label="Collapse Sidebar"
+          aria-expanded={true}
         >
-          <PanelLeftClose size={20} />
+          <PanelLeftClose size={20} aria-hidden="true" />
         </button>
       </div>
       <Card title="Monitoring Scope" className="full-height">
