@@ -131,6 +131,8 @@ services:
       - SAGE_PROBE_SECRET=${SAGE_PROBE_SECRET:-}
       # Enables POST /admin/routes (sent as X-SAGE-Admin-Token); unset = admin API disabled
       - SAGE_ADMIN_TOKEN=${SAGE_ADMIN_TOKEN:-}
+      # Peers allowed to set X-Forwarded-For / X-Real-IP (IPs/CIDRs, or *); unset = loopback + private ranges
+      - SAGE_TRUSTED_PROXIES=${SAGE_TRUSTED_PROXIES:-}
       # off | features | sync | async; only the B2 benchmark changes this
       - SAGE_ML_MODE=${SAGE_ML_MODE:-async}
     depends_on:
