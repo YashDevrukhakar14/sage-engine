@@ -189,10 +189,10 @@ the UI reads `VITE_BRIDGE_URL` (default `http://localhost:6006`).
 
 ```bash
 # 0. Cryptographically verify frozen models & contracts (tag v2-frozen-models-v6)
-#    On current main this exits non-zero, listing 4 scoring-path source files (inference_service/main.py,
-#    MLInferenceFilter.java, RedisTelemetryService.java, application.yaml) that were deliberately revised
-#    after the tag. Models, contracts and datasets must still match; the CI "Verify Frozen Model &
-#    Contract Integrity" step applies exactly this rule.
+#    Models, contracts and datasets must match the tag byte for byte. Scoring-path source files that were
+#    deliberately revised after the tag (inference_service/main.py, MLInferenceFilter.java,
+#    RedisTelemetryService.java, application.yaml) are listed for information only, the same rule as the CI
+#    integrity step. Add --strict to fail on those too; add --allow-dirty when you have uncommitted changes.
 python ml_pipeline/scripts/evaluate/verify_frozen_manifests.py
 
 # 1. Run automated test suites
