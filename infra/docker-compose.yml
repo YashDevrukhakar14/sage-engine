@@ -129,6 +129,8 @@ services:
       - ML_URL=http://sage-ml:8000/predict
       # Supplied from the shell / an uncommitted .env; the generator reads the same variable.
       - SAGE_PROBE_SECRET=${SAGE_PROBE_SECRET:-}
+      # Enables POST /admin/routes (sent as X-SAGE-Admin-Token); unset = admin API disabled
+      - SAGE_ADMIN_TOKEN=${SAGE_ADMIN_TOKEN:-}
       # off | features | sync | async; only the B2 benchmark changes this
       - SAGE_ML_MODE=${SAGE_ML_MODE:-async}
     depends_on:
