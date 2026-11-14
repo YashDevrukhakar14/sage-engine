@@ -144,7 +144,7 @@ body {
 
 .metric-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(130px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
 
@@ -697,10 +697,6 @@ tr.log-blocked {
 
   .insight-grid {
     grid-template-columns: 1fr;
-  }
-
-  .metric-grid {
-    grid-template-columns: repeat(2, 1fr);
   }
 
   .velocity-layout {
