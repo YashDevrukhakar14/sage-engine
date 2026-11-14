@@ -3,7 +3,7 @@ import { formatNumber } from "../utils/formatters";
 
 export default function GlobalMetrics({ metrics }) {
   return (
-    <div className="metric-grid fade-in-delay-1" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+    <div className="metric-grid fade-in-delay-1">
       <Card title="Total Requests" className="metric-card-neutral">
         <p className="metric-value" style={{ fontSize: '2.4rem' }}>{formatNumber(metrics.totalRequests)}</p>
       </Card>

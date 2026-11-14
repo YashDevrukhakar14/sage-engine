@@ -151,6 +151,24 @@ curl http://localhost:8083/actuator/health
 curl http://localhost:8000/health
 ```
 
+Optional settings (Redis host port, probe secret, ML mode, extra shadow models) are listed in
+[`infra/.env.example`](infra/.env.example); copy it to `infra/.env` (gitignored) to change them.
+
+### Live Dashboard (optional)
+
+The React dashboard reads gateway telemetry from Kafka through a small Socket.IO bridge. Requires Node.js 20.19+ or 22.12+ (needed by Vite) and the stack above running.
+
+```bash
+# Terminal 1: Kafka -> Socket.IO bridge on http://localhost:6006
+cd sage-dashboard && npm install && npm start
+
+# Terminal 2: dashboard UI on http://localhost:5173
+cd sage-dashboard/sage-ui && npm install && npm run dev
+```
+
+The bridge honours `BRIDGE_PORT`, `KAFKA_BROKER`, `KAFKA_TOPIC`, `KAFKA_GROUP_ID`, `GATEWAY_HEALTH_URL`, `ML_HEALTH_URL`, `REDIS_HOST`, `REDIS_PORT` and `UI_ORIGIN`;
+the UI reads `VITE_BRIDGE_URL` (default `http://localhost:6006`).
+
 ### Exposed Endpoints
 
 | Service | URL |
@@ -171,6 +189,10 @@ curl http://localhost:8000/health
 
 ```bash
 # 0. Cryptographically verify frozen models & contracts (tag v2-frozen-models-v6)
+#    On current main this exits non-zero, listing 4 scoring-path source files (inference_service/main.py,
+#    MLInferenceFilter.java, RedisTelemetryService.java, application.yaml) that were deliberately revised
+#    after the tag. Models, contracts and datasets must still match; the CI "Verify Frozen Model &
+#    Contract Integrity" step applies exactly this rule.
 python ml_pipeline/scripts/evaluate/verify_frozen_manifests.py
 
 # 1. Run automated test suites

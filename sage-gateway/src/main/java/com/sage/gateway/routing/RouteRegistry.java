@@ -46,4 +46,9 @@ public class RouteRegistry {
     public RouteNode getRoot() {
         return root;
     }
+
+    /** The route definitions this registry was built from (read-only). */
+    public List<RouteDefinition> getRoutes() {
+        return List.copyOf(routes);
+    }
 }

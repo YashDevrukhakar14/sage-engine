@@ -2,6 +2,7 @@ package com.sage.gateway.service;
 
 import com.sage.gateway.routing.RouteDefinition;
 import com.sage.gateway.routing.RouteNode;
+import com.sage.gateway.routing.RouteRegistry;
 import com.sage.gateway.routing.RouteResolver;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,10 @@ public class RouteManagerService {
     private static final Logger logger = LoggerFactory.getLogger(RouteManagerService.class);
     private final List<RouteDefinition> activeRoutes = new ArrayList<>();
 
-    public RouteManagerService(RouteResolver routeResolver) {
+    public RouteManagerService(RouteResolver routeResolver, RouteRegistry routeRegistry) {
         this.routeResolver = routeResolver;
+        // Start from the bootstrapped routes so a hot-added route extends the live tree instead of replacing it.
+        this.activeRoutes.addAll(routeRegistry.getRoutes());
     }
 
     public synchronized void addRoute(RouteDefinition newRoute){
