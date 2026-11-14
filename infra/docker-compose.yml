@@ -70,7 +70,7 @@ services:
 
   # Kafka UI - Optional but helpful for debugging
   kafka-ui:
-    image: provectuslabs/kafka-ui:latest
+    image: provectuslabs/kafka-ui:v0.7.2
     container_name: sage-kafka-ui
     depends_on:
       - kafka
@@ -147,7 +147,7 @@ services:
 
   # Prometheus - Metrics Collection
   prometheus:
-    image: prom/prometheus:latest
+    image: prom/prometheus:v3.16.0
     container_name: sage-prometheus
     ports:
       - "9091:9090"
@@ -164,7 +164,7 @@ services:
 
   # Grafana - Metrics Visualization
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:13.3.1
     container_name: sage-grafana
     ports:
       - "5050:3000"
@@ -181,7 +181,7 @@ services:
 
   # RedisInsight - Redis GUI (Optional)
   redis-insight:
-    image: redis/redisinsight:latest
+    image: redis/redisinsight:3.8.0
     container_name: sage-redis-insight
     ports:
       - "5540:5540"
