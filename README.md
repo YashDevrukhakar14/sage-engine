@@ -151,8 +151,15 @@ curl http://localhost:8083/actuator/health
 curl http://localhost:8000/health
 ```
 
-Optional settings (Redis host port, probe secret, ML mode, extra shadow models) are listed in
-[`infra/.env.example`](infra/.env.example); copy it to `infra/.env` (gitignored) to change them.
+Optional settings (Redis host port, probe secret, admin token, trusted proxies, ML mode, extra shadow models,
+Grafana password) are listed in [`infra/.env.example`](infra/.env.example); copy it to `infra/.env` (gitignored) to
+change them.
+
+- The route admin API (`POST /admin/routes`) is **disabled** unless `SAGE_ADMIN_TOKEN` is set; callers send it in the
+  `X-SAGE-Admin-Token` header.
+- The gateway honours `X-Forwarded-For` / `X-Real-IP` only from trusted proxies (`SAGE_TRUSTED_PROXIES`, default
+  loopback + private ranges, which covers the local traffic generators). Set it to your load balancer's address
+  when the gateway faces the internet.
 
 ### Live Dashboard (optional)
 
