@@ -36,6 +36,9 @@ body {
 .app-shell {
   min-height: 100vh;
   padding: 16px;
+  /* Card glow layers extend 40px past each card; clip them so they don't create a horizontal scrollbar.
+     `clip` (unlike `hidden`) doesn't make a scroll container, so the sticky sidebar keeps working. */
+  overflow-x: clip;
 }
 
 .dashboard-layout {
@@ -712,6 +715,13 @@ tr.log-blocked {
 
   .control-column {
     position: static;
+  }
+
+  /* Single-column layout: the side divider and its negative margin would push the sidebar past the viewport. */
+  .control-column.expanded {
+    border-right: none;
+    padding-right: 0;
+    margin-right: 0;
   }
 
   .full-height {
